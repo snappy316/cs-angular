@@ -5,14 +5,6 @@
     this.products = gems;
   });
 
-  app.controller('GalleryController', function(){
-    this.current = 0;
-    
-    this.setCurrent = function(val) {
-      this.current = val || 0;
-    };
-  });
-
   app.controller('ReviewController', function(){
     this.review = {};
     
@@ -20,6 +12,20 @@
       this.review.createdOn = Date.now();
       product.reviews.push(this.review);
       this.review = {};
+    };
+  });
+
+  app.directive('productGallery', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'product-gallery.html',
+      controller: function() {
+        this.current = 0;
+        this.setCurrent = function(imageNumber){
+          this.current = imageNumber || 0;
+        };
+      },
+      controllerAs: 'gallery'
     };
   });
 
